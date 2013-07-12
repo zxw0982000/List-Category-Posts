@@ -32,8 +32,7 @@ class ListCategoryPostsWidget extends WP_Widget{
     $thumbnail_size = ($instance['thumbnail_size']) ? $instance['thumbnail_size'] : 'thumbnail';
     $morelink = empty($instance['morelink']) ? ' ' : $instance['morelink'];
 
-    echo $before_widget;
-    echo $before_title . $title . $after_title;
+
 
     $atts = array(
       'id' => $category_id,
@@ -56,6 +55,16 @@ class ListCategoryPostsWidget extends WP_Widget{
     );
 
     $catlist_displayer = new CatListDisplayer($atts);
+    
+    
+    echo $before_widget;
+    
+    //These two lines of code display the more link right beside the title.I suppose someone need this.
+    $current_category_link=get_category_link($category_id);
+    echo $before_title . $title .'<a href="'.$current_category_link.'" id="more">See more</a>'. $after_title;
+
+    
+    
     echo  $catlist_displayer->display();
     echo $after_widget;
   }
